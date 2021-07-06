@@ -1,0 +1,8 @@
+@mixin nav-bar-theme($theme) {
+    $primary: map-get($theme, primary);
+    
+      .navbar-header {
+        background-color: mat-color($primary);
+    }
+  }
+  

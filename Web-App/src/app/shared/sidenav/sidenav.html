@@ -1,0 +1,15 @@
+<app-header (toggleSidenav)="toggleSidenav(sidenav)"></app-header>
+<mat-sidenav-container autosize>
+    <mat-sidenav #sidenav [opened]="(isScreenSmall | async) === false"
+        [mode]="(isScreenSmall | async) ? 'over' : 'side'" [autoFocus]="false">
+        <mat-nav-list>
+            <a mat-list-item [routerLink]=[item.link] *ngFor="let item of navigationItems">{{item.label}}</a>
+        </mat-nav-list>
+    </mat-sidenav>
+    <div>
+        <main>
+            <router-outlet></router-outlet>
+        </main>
+    </div>
+</mat-sidenav-container>
+<app-footer></app-footer>

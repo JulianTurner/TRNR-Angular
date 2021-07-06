@@ -1,0 +1,29 @@
+@use 'sass:map';
+@use '~@angular/material' as mat;
+
+@mixin theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+
+  
+  footer {
+   
+    .footer-links a {
+      color: mat.get-color-from-palette($primary, default-contrast);
+    }
+  }
+
+  .prim {
+    background-color: mat.get-color-from-palette($primary);
+  }
+  .acc {
+    background-color: mat.get-color-from-palette($accent);
+  }
+  .warn {
+    background-color: mat.get-color-from-palette($warn);
+  }
+}

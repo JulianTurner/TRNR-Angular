@@ -1,0 +1,28 @@
+@use '~@angular/material' as mat;
+
+@use 'sass:map';
+
+//pages
+@use  './app/pages/landing/landing-theme';
+
+//shared
+@use './app/shared/cookie-popup/cookie-popup-theme';
+@use './app/shared/footer/footer-theme';
+@use './app/shared/header/app-header-theme';
+
+// Styles for the docs app that are based on the current theme.
+@mixin theme($theme) {
+  $primary: map.get($theme, primary);
+  $accent: map.get($theme, accent);
+  $warn: map.get($theme, warn);
+  $background: map.get($theme, background);
+  $foreground: map.get($theme, foreground);
+
+ //pages
+ @include landing-theme.theme($theme);
+
+ //shared
+ @include cookie-popup-theme.theme($theme);
+ @include footer-theme.theme($theme);
+ @include app-header-theme.theme($theme);
+}

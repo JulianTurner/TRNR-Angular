@@ -1,0 +1,7 @@
+<div class="popup" *ngIf="!hasAccepted">
+  Wir verwenden Cookies, um Inhalte und Anzeigen zu personalisieren, und die Zugriffe auf unsere Website zu analysieren. 
+  <div class="buttons">
+    <a routerLink='datnschutz' mat-button>zum Datenschutz</a>
+    <button mat-button (click)="accept()">Ok, einverstanden.</button>
+  </div>
+</div>
