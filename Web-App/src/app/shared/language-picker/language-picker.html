@@ -1,0 +1,10 @@
+<button mat-icon-button [mat-menu-trigger-for]="languageMenu" aria-label="Select a language"
+        matTooltip="Select a language">
+  <mat-icon>translate</mat-icon>
+</button>
+
+<mat-menu #languageMenu="matMenu" xPosition="before" class="language-picker-menu">
+  <button mat-menu-item *ngFor="let language of languages" (click)="selectLanguage(language)">
+    <span>{{language.toUpperCase()}}</span>
+  </button>
+</mat-menu>

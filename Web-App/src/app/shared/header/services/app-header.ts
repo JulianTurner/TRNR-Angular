@@ -1,5 +1,6 @@
-import {Injectable} from '@angular/core';
-import {Title} from '@angular/platform-browser';
+import { Injectable } from '@angular/core';
+import { Title } from '@angular/platform-browser';
+import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
 import { Subject } from 'rxjs';
 
 /**
@@ -7,16 +8,18 @@ import { Subject } from 'rxjs';
  */
 @Injectable()
 export class ComponentPageTitle {
+  current: string = '';
 
-  private pageTitleSource = new Subject<string>();
-  pageTitle$ = this.pageTitleSource.asObservable();
-
-  settitle(title: string) {
-
-    console.log(title)
-    this.pageTitleSource.next(title);
-    this.bodyTitle.setTitle(title);
+  setTitle(title: string) {
+    this.current = title;
+    this.bodyTitle.setTitle(this.translate.instant(title));
   }
 
-  constructor(private bodyTitle: Title) {}
+  constructor(private bodyTitle: Title, private translate: TranslateService) {
+    translate.onLangChange.subscribe((event: LangChangeEvent) => {
+      if (this.current.length > 1) {
+        this.bodyTitle.setTitle(this.translate.instant(this.current));
+      }
+    });
+  }
 }

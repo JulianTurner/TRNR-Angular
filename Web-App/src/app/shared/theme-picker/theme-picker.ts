@@ -27,7 +27,6 @@ import {LiveAnnouncer} from '@angular/cdk/a11y';
   encapsulation: ViewEncapsulation.None
 })
 export class ThemePicker implements OnInit, OnDestroy {
-  private _queryParamSubscription = Subscription.EMPTY;
   currentTheme: SiteTheme | undefined;
 
   // The below colors need to align with the themes defined in theme-picker.scss
@@ -58,12 +57,8 @@ export class ThemePicker implements OnInit, OnDestroy {
   constructor(public styleManager: StyleManager,
               private _themeStorage: ThemeStorage,
               private _activatedRoute: ActivatedRoute,
-              private liveAnnouncer: LiveAnnouncer,
-              iconRegistry: MatIconRegistry,
-              sanitizer: DomSanitizer) {
-    iconRegistry.addSvgIcon('theme-example',
-                            sanitizer.bypassSecurityTrustResourceUrl(
-                                'assets/img/theme-demo-icon.svg'));
+) {
+
     const themeName = this._themeStorage.getStoredThemeName();
     if (themeName) {
       this.selectTheme(themeName);
@@ -71,17 +66,10 @@ export class ThemePicker implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this._queryParamSubscription = this._activatedRoute.queryParamMap
-      .pipe(map((params: ParamMap) => params.get('theme')))
-      .subscribe((themeName: string | null) => {
-        if (themeName) {
-          this.selectTheme(themeName);
-        }
-    });
+   
   }
 
   ngOnDestroy() {
-    this._queryParamSubscription.unsubscribe();
   }
 
   selectTheme(themeName: string) {
@@ -100,7 +88,6 @@ export class ThemePicker implements OnInit, OnDestroy {
     }
 
     if (this.currentTheme) {
-      this.liveAnnouncer.announce(`${theme.displayName} theme selected.`, 'polite', 3000);
       this._themeStorage.storeTheme(this.currentTheme);
     }
   }

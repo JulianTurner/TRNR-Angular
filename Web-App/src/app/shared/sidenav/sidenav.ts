@@ -25,7 +25,7 @@ export class Sidenav {
     { link: 'leistungen', label: 'Leistungen' },
     { link: 'kontakt', label: 'Kontakt' },
     { link: 'datenschutz', label: 'Datenschutz' },
-    { link: 'impressum', label: 'Impressum' },
+    { link: 'impressum', label: 'impressum.title' },
   ]
 
   constructor(public router: Router, breakpoints: BreakpointObserver) {

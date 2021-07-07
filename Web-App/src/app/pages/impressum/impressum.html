@@ -1,3 +1,16 @@
 <div style="min-height: 100vh;">
-    impressum
+  <div>
+
+
+    <!-- translation: translation pipe -->
+    <p>{{ 'impressum.title' | translate }}</p>
+
+    <!-- translation: directive (key as attribute)-->
+    <p [translate]="'impressum.title'"></p>
+
+    <!-- translation: directive (key as content of element) -->
+    <p translate>impressum.title</p>
+</div>
+<button (click)="useLanguage('en')">en</button>
+<button (click)="useLanguage('de')">de</button>
 </div>

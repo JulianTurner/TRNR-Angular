@@ -19,7 +19,7 @@ import { AppSharedModule } from 'src/app/shared/shared.module';
     }
   
     ngOnInit(): void {
-      this._componentPageTitle.settitle('TRNR');
+      this._componentPageTitle.setTitle('TRNR');
     }
   }
 
