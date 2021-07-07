@@ -12,6 +12,7 @@ export class ComponentPageTitle {
   pageTitle$ = this.pageTitleSource.asObservable();
 
   settitle(title: string) {
+
     console.log(title)
     this.pageTitleSource.next(title);
     this.bodyTitle.setTitle(title);
