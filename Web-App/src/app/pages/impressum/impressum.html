@@ -1,16 +1,14 @@
 <div style="min-height: 100vh;">
-  <div>
 
 
     <!-- translation: translation pipe -->
-    <p>{{ 'impressum.title' | translate }}</p>
+    <p>{{ 'imprint.test' | transloco }}</p>
 
-    <!-- translation: directive (key as attribute)-->
-    <p [translate]="'impressum.title'"></p>
-
-    <!-- translation: directive (key as content of element) -->
-    <p translate>impressum.title</p>
-</div>
-<button (click)="useLanguage('en')">en</button>
-<button (click)="useLanguage('de')">de</button>
+    <ng-container *transloco="let t; loadingTpl: loading">
+        <h1>{{ t('imprint.test') }}</h1>
+      </ng-container>
+      
+      <ng-template #loading>
+        <h1>Loading...</h1>
+      </ng-template>
 </div>

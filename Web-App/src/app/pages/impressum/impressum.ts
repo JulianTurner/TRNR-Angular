@@ -1,57 +1,43 @@
-import { transition, trigger, useAnimation } from '@angular/animations';
-import { HttpClient } from '@angular/common/http';
 import { Component, NgModule, OnInit } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
 import { RouterModule, Routes } from '@angular/router';
-import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { TranslocoModule, TranslocoService, TRANSLOCO_LOADING_TEMPLATE, TRANSLOCO_SCOPE } from '@ngneat/transloco';
+import { filter, pluck } from 'rxjs/operators';
 import { ComponentPageTitle } from 'src/app/shared/header/services/app-header';
 import { AppSharedModule } from 'src/app/shared/shared.module';
-import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-impressum',
   templateUrl: './impressum.html',
   styleUrls: ['./impressum.scss'],
-  animations: [],
+  providers: [
+    {
+      provide: TRANSLOCO_SCOPE,
+      useValue: 'imprint'
+    }
+  ]
 })
 export class ImpressumComponent implements OnInit {
-  constructor(public _componentPageTitle: ComponentPageTitle, private translate: TranslateService) {
-    
+  constructor(
+    public _componentPageTitle: ComponentPageTitle,
+    public translocoService: TranslocoService
+  ) {
+
   }
 
   ngOnInit(): void {
-    this._componentPageTitle.setTitle('impressum.title');
-
+    this._componentPageTitle.setTitle('imprint.test');    
   }
-
-  useLanguage(language: string): void {
-    this.translate.use(language);
-}
 }
 
 const routes: Routes = [{ path: '', component: ImpressumComponent }];
 
-
-export function createTranslateLoader(http: HttpClient) {
-  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
-}
-
 @NgModule({
-  imports: [RouterModule.forChild(routes),     
-    TranslateModule.forChild({
-      loader: {
-          provide: TranslateLoader,
-          useFactory: (createTranslateLoader),
-          deps: [HttpClient]
-      }
-    ,
-      isolate: false
-  }),AppSharedModule],
+  imports: [RouterModule.forChild(routes), TranslocoModule, AppSharedModule],
   exports: [RouterModule],
   declarations: [ImpressumComponent],
+  providers: [
+    { provide: TRANSLOCO_SCOPE, useValue: 'imprint' },
+    
+  ]
 })
-export class ImpressumgModule {
-
-}
-
+export class ImpressumgModule {}

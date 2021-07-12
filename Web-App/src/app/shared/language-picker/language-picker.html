@@ -4,7 +4,9 @@
 </button>
 
 <mat-menu #languageMenu="matMenu" xPosition="before" class="language-picker-menu">
-  <button mat-menu-item *ngFor="let language of languages" (click)="selectLanguage(language)">
-    <span>{{language.toUpperCase()}}</span>
+  <button mat-menu-item *ngFor="let language of langs" (click)="selectLanguage(language.id)">
+    <span>{{language.label}}</span>
   </button>
+  <span>{{ 'name' | transloco }}</span>
+
 </mat-menu>

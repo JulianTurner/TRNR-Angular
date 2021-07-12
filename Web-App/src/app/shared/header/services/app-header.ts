@@ -1,25 +1,42 @@
 import { Injectable } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
-import { Subject } from 'rxjs';
+import { TranslocoService } from '@ngneat/transloco';
+import { filter, pluck } from 'rxjs/operators';
 
 /**
  * Service responsible for setting the title that appears.
  */
 @Injectable()
 export class ComponentPageTitle {
-  current: string = '';
+  currentKey: string = '';
+  currentTitle: string = '';
 
   setTitle(title: string) {
-    this.current = title;
-    this.bodyTitle.setTitle(this.translate.instant(title));
+    this.currentTitle = '';
+    this.currentKey = title;
   }
 
-  constructor(private bodyTitle: Title, private translate: TranslateService) {
-    translate.onLangChange.subscribe((event: LangChangeEvent) => {
-      if (this.current.length > 1) {
-        this.bodyTitle.setTitle(this.translate.instant(this.current));
-      }
-    });
+  constructor(
+    private bodyTitle: Title,
+    public translocoService: TranslocoService
+  ) {
+    this.translocoService.events$
+      .pipe(
+        filter((e) => e.type === 'translationLoadSuccess'),
+        pluck('payload')
+      )
+      .subscribe(({ langName, scope }) => {
+        this.currentTitle = translocoService.translate(this.currentKey);
+        this.bodyTitle.setTitle(
+          this.currentTitle
+        );
+      });
+
+    translocoService.langChanges$.subscribe((lang) => {
+      this.currentTitle = this.translocoService.translate(this.currentKey);
+bodyTitle.setTitle(this.currentTitle);
+    }
+
+    );
   }
 }

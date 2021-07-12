@@ -1,11 +1,9 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Component } from '@angular/core';
 import { MatDrawerToggleResult, MatSidenav } from '@angular/material/sidenav';
-import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { ComponentPageTitle } from '../header/services/app-header';
 
 const EXTRA_SMALL_WIDTH_BREAKPOINT = 720;
 const SMALL_WIDTH_BREAKPOINT = 959;
@@ -25,7 +23,7 @@ export class Sidenav {
     { link: 'leistungen', label: 'Leistungen' },
     { link: 'kontakt', label: 'Kontakt' },
     { link: 'datenschutz', label: 'Datenschutz' },
-    { link: 'impressum', label: 'impressum.title' },
+    { link: 'impressum', label: 'name' },
   ]
 
   constructor(public router: Router, breakpoints: BreakpointObserver) {
@@ -41,4 +39,6 @@ export class Sidenav {
     console.log("toggle")
     return sidenav.toggle();
   }
+
+  
 }

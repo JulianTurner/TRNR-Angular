@@ -5,11 +5,10 @@ import {
   OnInit,
   ViewEncapsulation,
 } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
-import {
-  LanguageStorage,
-  
-} from './language-storage/language-storage';
+import { AvailableLangs, TranslocoService } from '@ngneat/transloco';
+import { Subscription } from 'rxjs';
+import { take } from 'rxjs/operators';
+import { LanguageStorage } from './services/language-storage/language-storage';
 
 @Component({
   selector: 'language-picker',
@@ -19,26 +18,45 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class LanguagePicker implements OnInit, OnDestroy {
-  languages: string[] = [ 'en' , 'de' ];
+  private subscription: Subscription = Subscription.EMPTY;
+  langs: any = [];
 
   constructor(
-    private translate: TranslateService,
-    private _languageStorage: LanguageStorage
+    private _languageStorage: LanguageStorage,
+    public translocoService: TranslocoService
   ) {
+    this.langs = translocoService.getAvailableLangs();
     const langName = this._languageStorage.getStoredLanguage();
     if (langName) {
-     this.translate.use(langName);
+      this.change(langName)
     } else {
       //this.translate.use('en');
     }
   }
 
+  change(lang: string) {
+    // Ensure new active lang is loaded
+    this.subscription.unsubscribe();
+    this.subscription = this.translocoService
+      .load(lang)
+      .pipe(take(1))
+      .subscribe(() => {
+        this.translocoService.setActiveLang(lang);
+      });
+  }
+
+  get activeLang() {
+    return this.translocoService.getActiveLang();
+  }
+
   ngOnInit() {}
 
-  ngOnDestroy() {}
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
 
   selectLanguage(language: string) {
-    this.translate.use(language);
     this._languageStorage.storeLanguage(language);
+    this.change(language)
   }
 }

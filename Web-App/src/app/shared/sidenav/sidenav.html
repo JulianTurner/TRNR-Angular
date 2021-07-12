@@ -3,7 +3,7 @@
     <mat-sidenav #sidenav [opened]="(isScreenSmall | async) === false"
         [mode]="(isScreenSmall | async) ? 'over' : 'side'" [autoFocus]="false">
         <mat-nav-list>
-            <a mat-list-item [routerLink]=[item.link] *ngFor="let item of navigationItems">{{item.label | translate}}</a>
+            <a mat-list-item [routerLink]=[item.link] *ngFor="let item of navigationItems">{{item.label | transloco}}</a>
         </mat-nav-list>
     </mat-sidenav>
     <div>
