@@ -9,6 +9,18 @@ export const APP_ROUTES: Routes = [
     {
         path: 'impressum',
         pathMatch: 'full',
-        loadChildren: () => import('./pages/impressum').then(m => m.ImpressumgModule)
-    }
+        redirectTo: 'imprint'
+    },
+    {
+        path: 'imprint',
+        pathMatch: 'full',
+        loadChildren: () => import('./pages/imprint').then(m => m.ImprintModule)
+    },
+
+    {
+        path: '404',
+        loadChildren: () =>
+          import('./pages/not-found').then((m) => m.NotFoundModule),
+      },
+      { path: '**', redirectTo: '/404' },
 ]

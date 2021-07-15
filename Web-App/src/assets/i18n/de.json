@@ -1,3 +1,6 @@
 {
-  "name": "Impressum"
+  "services": "Leistungen",
+  "contact": "Kontakt",
+  "privacy": "Datenschutz",
+  "imprint": "Impressum"
 }

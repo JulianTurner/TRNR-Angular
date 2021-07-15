@@ -1,4 +1,3 @@
-<app-header (toggleSidenav)="toggleSidenav(sidenav)"></app-header>
 <mat-sidenav-container autosize>
     <mat-sidenav #sidenav [opened]="(isScreenSmall | async) === false"
         [mode]="(isScreenSmall | async) ? 'over' : 'side'" [autoFocus]="false">

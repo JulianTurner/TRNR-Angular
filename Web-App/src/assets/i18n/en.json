@@ -1,3 +1,6 @@
 {
-  "name": "Imprint"
+  "services": "Services",
+  "contact": "Contact",
+  "privacy": "Privacy",
+  "imprint": "Imprint"
 }

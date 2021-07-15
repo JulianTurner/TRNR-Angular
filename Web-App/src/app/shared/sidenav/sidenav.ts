@@ -20,10 +20,10 @@ export class Sidenav {
   pageheader: string = ''
 
   navigationItems = [
-    { link: 'leistungen', label: 'Leistungen' },
-    { link: 'kontakt', label: 'Kontakt' },
-    { link: 'datenschutz', label: 'Datenschutz' },
-    { link: 'impressum', label: 'name' },
+    { link: 'leistungen', label: 'services' },
+    { link: 'kontakt', label: 'contact' },
+    { link: 'datenschutz', label: 'privacy' },
+    { link: 'impressum', label: 'imprint' },
   ]
 
   constructor(public router: Router, breakpoints: BreakpointObserver) {

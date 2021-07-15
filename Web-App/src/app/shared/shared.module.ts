@@ -4,8 +4,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 
 import { AppFooter } from './footer/footer';
-import { PageHeader } from './header/app-header';
-import { ComponentPageTitle } from './header/services/app-header';
 import { NavBar } from './navbar/navbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
@@ -30,7 +28,6 @@ import { TranslocoModule } from '@ngneat/transloco';
 @NgModule({
   declarations: [
     NavBar,
-    PageHeader,
     AppFooter,
     ThemePicker,
     CookiePopup,
@@ -58,9 +55,8 @@ import { TranslocoModule } from '@ngneat/transloco';
     MatSelectModule,
     TranslocoModule,
   ],
-  exports: [NavBar, PageHeader, AppFooter, CookiePopup, Sidenav],
+  exports: [NavBar, AppFooter, CookiePopup, Sidenav],
   providers: [
-    ComponentPageTitle,
     MatNativeDateModule,
     StyleManager,
     ThemeStorage,
