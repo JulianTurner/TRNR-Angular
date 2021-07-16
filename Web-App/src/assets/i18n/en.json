@@ -1,6 +1,14 @@
 {
-  "services": "Services",
-  "contact": "Contact",
-  "privacy": "Privacy",
-  "imprint": "Imprint"
+  "navigation": {
+    "services": "Services",
+    "contact": "Contact",
+    "privacy": "Privacy",
+    "imprint": "Imprint"
+  },
+  "languagePicker": {
+    "selectToolTip": "Select a language"
+  },
+  "themePicker": {
+    "selectToolTip": "Select a theme"
+  }
 }
