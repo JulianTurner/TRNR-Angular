@@ -24,6 +24,7 @@ import { Sidenav } from './sidenav/sidenav';
 import { LanguagePicker } from './language-picker/language-picker';
 import { MatSelectModule } from '@angular/material/select';
 import { TranslocoModule } from '@ngneat/transloco';
+import { SideNavService } from './sidenav/servives/SidenavService';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { TranslocoModule } from '@ngneat/transloco';
   exports: [NavBar, AppFooter, CookiePopup, Sidenav],
   providers: [
     MatNativeDateModule,
+    SideNavService,
     StyleManager,
     ThemeStorage,
     LanguageStorage,
@@ -67,5 +69,5 @@ export class AppSharedModule {
   /**
    *
    */
-  constructor() {}
+  constructor() { }
 }

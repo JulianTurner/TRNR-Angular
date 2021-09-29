@@ -1,9 +1,10 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { Component } from '@angular/core';
-import { MatDrawerToggleResult, MatSidenav } from '@angular/material/sidenav';
+import { Component, ViewChild } from '@angular/core';
+import { MatDrawer, MatDrawerToggleResult, MatSidenav } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { SideNavService } from './servives/SidenavService';
 
 const EXTRA_SMALL_WIDTH_BREAKPOINT = 720;
 const SMALL_WIDTH_BREAKPOINT = 959;
@@ -14,8 +15,10 @@ const SMALL_WIDTH_BREAKPOINT = 959;
   styleUrls: ['./sidenav.scss'],
 })
 export class Sidenav {
+  @ViewChild(MatSidenav)
+  public sidenav!: MatDrawer;
 
-  isExtraScreenSmall: Observable<boolean>;
+
   isScreenSmall: Observable<boolean>;
   pageheader: string = ''
 
@@ -26,19 +29,26 @@ export class Sidenav {
     { link: 'impressum', label: 'navigation.imprint' },
   ]
 
-  constructor(public router: Router, breakpoints: BreakpointObserver) {
-    this.isExtraScreenSmall = breakpoints
-      .observe(`(max-width: ${EXTRA_SMALL_WIDTH_BREAKPOINT}px)`)
-      .pipe(map((breakpoint: { matches: any }) => breakpoint.matches));
+  constructor(public router: Router, breakpoints: BreakpointObserver, private sideNavService: SideNavService) {
+
     this.isScreenSmall = breakpoints
       .observe(`(max-width: ${SMALL_WIDTH_BREAKPOINT}px)`)
       .pipe(map((breakpoint) => breakpoint.matches));
   }
 
-  toggleSidenav(sidenav: MatSidenav): Promise<MatDrawerToggleResult> {
-    console.log("toggle")
-    return sidenav.toggle();
-  }
 
-  
+  ngAfterViewInit() {
+    setTimeout(() => {
+      this.sideNavService.sideNavToggleSubject.subscribe(() => {
+        this.sidenav.toggle();
+      });
+    }, 0);
+    setTimeout(() => {
+      if (this.isScreenSmall) {
+        this.sidenav.toggle();
+      }
+      ;
+    }, 0);
+
+  }
 }

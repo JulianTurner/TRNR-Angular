@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { SideNavService } from '../sidenav/servives/SidenavService';
 
 
 
@@ -9,18 +10,14 @@ import { Router } from '@angular/router';
   styleUrls: ['./navbar.scss'],
 })
 export class NavBar {
-firma: string = "TRNR"
+  firma: string = "TRNR"
 
-navigationItems = [
-  { link: 'leistungen', label: 'Leistungen' },
-  { link: 'kontakt', label: 'Kontakt' },
-  { link: 'datenschutz', label: 'Datenschutz' },
-  { link: 'impressum', label: 'Impressum' },
-];
-
-  constructor(public router: Router) {
+  constructor(public router: Router, private sideNavService: SideNavService) {
 
   }
-  
+
+  toggleSidenav() {
+    this.sideNavService.toggle();
+  }
 
 }

@@ -3,6 +3,7 @@ import { Component, NgModule, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterModule, Routes } from '@angular/router';
 import { AppSharedModule } from 'src/app/shared/shared.module';
+import { SideNavService } from 'src/app/shared/sidenav/servives/SidenavService';
 
 @Component({
   selector: 'app-landing',
@@ -11,10 +12,15 @@ import { AppSharedModule } from 'src/app/shared/shared.module';
   animations: [],
 })
 export class LandingComponent implements OnInit {
-  constructor() {}
+  constructor(private sideNavService: SideNavService) { }
 
   ngOnInit(): void {
     //this._componentPageTitle.setTitle('TRNR');
+  }
+
+
+  toggleSideNav() {
+    this.sideNavService.toggle();
   }
 }
 
@@ -25,4 +31,4 @@ const routes: Routes = [{ path: '', component: LandingComponent }];
   exports: [RouterModule],
   declarations: [LandingComponent],
 })
-export class LandingModule {}
+export class LandingModule { }
