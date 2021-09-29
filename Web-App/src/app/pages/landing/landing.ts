@@ -3,7 +3,7 @@ import { Component, NgModule, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterModule, Routes } from '@angular/router';
 import { AppSharedModule } from 'src/app/shared/shared.module';
-import { SideNavService } from 'src/app/shared/sidenav/servives/SidenavService';
+import { SideNavService } from 'src/app/shared/sidenav/services/SidenavService';
 
 @Component({
   selector: 'app-landing',

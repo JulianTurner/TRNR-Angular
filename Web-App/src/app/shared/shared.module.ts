@@ -24,7 +24,7 @@ import { Sidenav } from './sidenav/sidenav';
 import { LanguagePicker } from './language-picker/language-picker';
 import { MatSelectModule } from '@angular/material/select';
 import { TranslocoModule } from '@ngneat/transloco';
-import { SideNavService } from './sidenav/servives/SidenavService';
+import { SideNavService } from './sidenav/services/SidenavService';
 
 @NgModule({
   declarations: [

@@ -4,7 +4,7 @@ import { MatDrawer, MatDrawerToggleResult, MatSidenav } from '@angular/material/
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { SideNavService } from './servives/SidenavService';
+import { SideNavService } from './services/SidenavService';
 
 const EXTRA_SMALL_WIDTH_BREAKPOINT = 720;
 const SMALL_WIDTH_BREAKPOINT = 959;

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { SideNavService } from '../sidenav/servives/SidenavService';
+import { SideNavService } from '../sidenav/services/SidenavService';
 
 
 
