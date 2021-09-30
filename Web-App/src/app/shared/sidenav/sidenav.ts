@@ -3,7 +3,7 @@ import { Component, ViewChild } from '@angular/core';
 import { MatDrawer, MatDrawerToggleResult, MatSidenav } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, mergeMap } from 'rxjs/operators';
 import { SideNavService } from './services/SidenavService';
 
 const EXTRA_SMALL_WIDTH_BREAKPOINT = 720;
@@ -36,6 +36,7 @@ export class Sidenav {
       .pipe(map((breakpoint) => breakpoint.matches));
   }
 
+  ngOnInit() { this.router.events.pipe(mergeMap(event => { return this.isScreenSmall; })).subscribe(isSideNavVisible => { if (isSideNavVisible) { this.sidenav.close(); } }); }
 
   ngAfterViewInit() {
     setTimeout(() => {
