@@ -39,16 +39,7 @@ export class Sidenav {
 
   ngAfterViewInit() {
     setTimeout(() => {
-      this.sideNavService.sideNavToggleSubject.subscribe(() => {
-        this.sidenav.toggle();
-      });
+      this.sideNavService.setDrawer(this.sidenav)
     }, 0);
-    setTimeout(() => {
-      if (this.isScreenSmall) {
-        this.sidenav.toggle();
-      }
-      ;
-    }, 0);
-
   }
 }
