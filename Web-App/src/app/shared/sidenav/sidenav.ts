@@ -18,7 +18,7 @@ export class Sidenav {
   @ViewChild(MatSidenav)
   public sidenav!: MatDrawer;
 
-
+  isExtraScreenSmall: Observable<boolean>;
   isScreenSmall: Observable<boolean>;
   pageheader: string = ''
 
@@ -31,12 +31,17 @@ export class Sidenav {
 
   constructor(public router: Router, breakpoints: BreakpointObserver, private sideNavService: SideNavService) {
 
+    this.isExtraScreenSmall = breakpoints
+      .observe(`(max-width: ${EXTRA_SMALL_WIDTH_BREAKPOINT}px)`)
+      .pipe(map((breakpoint: { matches: any }) => breakpoint.matches));
     this.isScreenSmall = breakpoints
       .observe(`(max-width: ${SMALL_WIDTH_BREAKPOINT}px)`)
       .pipe(map((breakpoint) => breakpoint.matches));
   }
 
-  ngOnInit() { this.router.events.pipe(mergeMap(event => { return this.isScreenSmall; })).subscribe(isSideNavVisible => { if (isSideNavVisible) { this.sidenav.close(); } }); }
+  ngOnInit() {
+    this.router.events.pipe(mergeMap(event => { return this.isScreenSmall; })).subscribe(isSideNavVisible => { if (isSideNavVisible) { this.sidenav.close(); } });
+  }
 
   ngAfterViewInit() {
     setTimeout(() => {
